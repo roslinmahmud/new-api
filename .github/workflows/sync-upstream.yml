@@ -1,0 +1,20 @@
+name: Sync Upstream Main
+
+on:
+  schedule:
+    # Runs daily at 02:00 UTC (adjust timing as needed)
+    - cron: '0 2 * * *'
+  # Allows manually triggering the workflow from the "Actions" tab on GitHub
+  workflow_dispatch:
+
+jobs:
+  sync-fork:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required for GITHUB_TOKEN to push updates to your main branch
+
+    steps:
+      - name: Sync with upstream repository
+        run: gh repo sync ${{ github.repository }} -b main --source QuantumNous/new-api
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
