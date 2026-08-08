@@ -19,14 +19,15 @@ For commercial licensing, please contact support@quantumnous.com
 import { useCallback, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
+// CUSTOM EXTENSION BEGIN: custom pay-as-you-go landing page
+import { CustomHome } from '@/components/Custom/home'
+// CUSTOM EXTENSION END
 import { PublicLayout } from '@/components/layout'
-import { Footer } from '@/components/layout/components/footer'
 import { RichContent } from '@/components/rich-content'
 import { useTheme } from '@/context/theme-provider'
 import { isLikelyHtml } from '@/lib/content-format'
 import { useAuthStore } from '@/stores/auth-store'
 
-import { CTA, Features, Hero, HowItWorks, Stats } from './components'
 import { useHomePageContent } from './hooks'
 
 export function Home() {
@@ -122,12 +123,9 @@ export function Home() {
 
   return (
     <PublicLayout showMainContainer={false}>
-      <Hero isAuthenticated={isAuthenticated} />
-      <Stats />
-      <Features />
-      <HowItWorks />
-      <CTA isAuthenticated={isAuthenticated} />
-      <Footer />
+      {/* CUSTOM EXTENSION BEGIN: custom pay-as-you-go landing page */}
+      <CustomHome isAuthenticated={isAuthenticated} />
+      {/* CUSTOM EXTENSION END */}
     </PublicLayout>
   )
 }
